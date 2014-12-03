@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="MainStyle.css">
+</head>
+
+<header id="header">
+
+</header>
+<body>
+
+<div class = "menu" id ="sticky_navigation">
+	<ul>
+		<li class = "menuItem" id="btnHome"><a></a></li>
+		<li class = "menuItem" id="btn1"><a>Ludum Dare</a></li>
+		<li class = "menuItem" id="btn2"><a>Twitch</a></li>
+		<li class = "menuItem" id="btn3"><a>Experience</a></li>
+		<li class = "menuItem" id="btn4"><a>About me</a></li>
+	</ul>
+</div>
+<div class = "menu" id ="sticky_navigation_clone">
+	<ul>
+		<li class = "menuItem" id="btn1"><a>Ludum Dare</a></li>
+		<li class = "menuItem" id="btn2"><a>Twitch</a></li>
+		<li class = "menuItem" id="btn3"><a>Experience</a></li>
+		<li class = "menuItem" id="btn4"><a>About me</a></li>
+	</ul>
+</div>
+<div class= "mainContent" id = "scrollTo">
+
+
+
+	<div>
+		<div class="pages" id="page1">
+			<h1>Ludum Dare</h1>
+			<p> During the weekend I will be participating in the game jam Ludum Dare. 
+			It's one of the longest running and overall biggest game Jams.
+			The goal is to create the best game in 72 hours. I am super excited!</br>
+			Hopefully I will be able to push something out, maybe even something worth playing but lets not get our hopes up to high.
+			For the competition I will use the unity engine, coding in c#.
+			I might use blender if I decide to go 3D (which I'm trying to convince my self not to, I haven't got the time, but its so much more fun).
+			I'll use Visual Studio as my IDE and Inkscape for UI/sprites, LMMS & Audacity for audio.	
+			</p>
+			<p>
+			<a href ="http://ludumdare.com/compo/"> Ludum Dares Website</a>
+			</p>
+		</div>
+	</div>
+	<div>
+		<div class="pages" id="page2">
+			<h1>Twitch</h1>
+			<p>I will be streaming my efforts on <a href="http://www.twitch.tv/seledorn">twitch</a>!
+			Come hang out and watch me tear my hair off trying to find some bug while finishing off my 40th cup coffee, It'll be spectacular!</p>
+			<p>
+			If what you see looks fun, (and trust me it is) why don't you try it yourself, everything I use is free and only a quick download away!
+			</p>
+			<div> <a id="twitchButton">Watch Twitch In-Bedded</a> 
+			<iframe id="twitch" src="http://www.twitch.tv/seledorn/embed" frameborder="0" scrolling="no" ></iframe><a href="http://www.twitch.tv/seledorn?tt_medium=live_embed&tt_content=text_link" style="padding:2px 0px 4px; display:block; font-weight:normal; font-size:10px;text-decoration:underline;"></a>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="pages" id="page3">
+			<h1>Experience</h1>
+			<p> I have very little experience, I am 19 years old and been interested in developing games for about a year, before that I programmed on an off for another year. 
+				I have though myself programming entirely through trial-and-error and Youtube videos so excuse me if I don't follow popper protocol, I haven't taken a programming class in my life.
+				I did participate in tagjam 16 a couple a weeks back, which was a blast and I believe I learnt a lot.
+			</p>
+			<p>
+				TL;DR: No Experience
+			</p>
+		</div>
+	</div>
+	<div>
+		<div class="pages" id="page4">
+			<h1>About me</h1>
+			<p>
+				I am 19 years old, live in Sweden and am currently working an office job to save up money for my two month trip to the Alps in January.
+				I will go to university next year, probably IT or CS at Chalmers, Gothenburg.
+
+				Game-development is only a hobby of mine, I don't expect to make any money form it, (although I have gathered up 9 cents from my games. 
+		</div>
+	</div>
+</div>
+</body>
+<footer>
+<i> <a>This is my beautiful footer </a></i> 
+</footer>
+
+<script src="jquery.js"></script>
+<script>$(function()
+{
+	var sticky_navigation_offset_top = $('#sticky_navigation').offset().top;
+	var sticky_navigation = function()
+	{
+		var scroll_top = $(window).scrollTop();
+		if (scroll_top > sticky_navigation_offset_top) { 
+			$('#sticky_navigation').css({ 'position': 'fixed', 'top':0, 'left':0 });
+			$("#sticky_navigation_clone").show();
+		} else {
+			$('#sticky_navigation').css({ 'position': 'relative' }); 
+			$("#sticky_navigation_clone").hide();
+		}   
+	};
+	var slideInAll = function()
+	{
+		var scroll_bottom = $(window).scrollTop() + $(window).height()-150;
+		$(".pages").each(function(i,obj)
+		{
+			var currentPos = $(obj).offset().top;
+			if(currentPos<scroll_bottom)
+			{
+			$(obj).css( "opacity", 1 );
+			}else{
+			
+			$(obj).css( "opacity", 0 );
+			}
+			
+			
+		});
+	};
+	
+	
+	$("#btnHome").on("click",function()
+	{
+		$("#header").scrollView();
+	});
+	$("#btn1").on("click",function()
+	{
+		$("#page1").scrollView();
+	});
+	$("#btn2").on("click",function()
+	{
+		$("#page2").scrollView();
+	});
+	$("#btn3").on("click",function()
+	{
+		$("#page3").scrollView();
+	});
+	$("#btn4").on("click",function()
+	{
+		$("#page4").scrollView();
+	});
+	$("#twitchButton").on("click",function()
+	{
+		$("#twitch").toggle("scale");
+	});
+	$("#twitch").toggle("scale");
+	$.fn.scrollView = function () {
+		return this.each(function () 
+		{
+			$('html, body').animate(
+			{
+				scrollTop: $(this).offset().top
+			}, 500);
+		});
+	}
+	
+	
+	sticky_navigation();
+	slideInAll();
+	$(window).scroll(function() 
+	{
+		slideInAll();
+		sticky_navigation();
+	});
+	
+	
+	
+});</script>
+
+</html>
